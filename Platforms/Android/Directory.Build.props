@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>$(MSBuildThisFileDirectory)pds.jks</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>br1l14nt</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>key0</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>br1l14nt</AndroidSigningKeyPass>
+  </PropertyGroup>
+</Project>

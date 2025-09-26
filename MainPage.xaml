@@ -1,16 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="simastermobileapps.MainPage">
+             x:Class="simastermobileapps.MainPage"
+             NavigationPage.HasNavigationBar="False">
 
-    <Grid>
-        <WebView x:Name="MyWebView"
-                 Navigated="WebView_Navigated"/>
+    <Grid RowDefinitions="*,Auto">
+        <!-- WebView dan LoadingIndicator -->
+        <Grid>
+            <WebView x:Name="MyWebView"
+                     Navigated="WebView_Navigated"
+                     Navigating="WebView_Navigating"/>
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               IsRunning="True"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+        </Grid>
 
-        <ActivityIndicator x:Name="LoadingIndicator"
-                           IsRunning="True"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center" />
+        <Grid Grid.Row="1"
+            Padding="10,5"
+            BackgroundColor="#f0f0f0"
+            ColumnDefinitions="*,Auto,Auto,Auto"
+            VerticalOptions="Center">
+            <!-- URL Label -->
+            <Label x:Name="UrlLabel"
+                Grid.Column="0"
+                Text="URL"
+                FontSize="12"
+                TextColor="Gray"
+                LineBreakMode="CharacterWrap"
+                VerticalOptions="Center"
+                HorizontalOptions="StartAndExpand"/>
+            <!-- Back IconButton -->
+            <Button Grid.Column="1"
+                    Text="&#xf060;"
+                    FontFamily="FA"
+                    FontSize="22"
+                    BackgroundColor="#E3F2FD"
+                    CornerRadius="20"
+                    HeightRequest="32"
+                    WidthRequest="32"
+                    Margin="5,0"
+                    Clicked="BackButton_Clicked"/>
+            <!-- Refresh IconButton -->
+            <Button Grid.Column="2"
+                    Text="&#xf021;"
+                    FontFamily="FA"
+                    FontSize="22"
+                    BackgroundColor="#C8E6C9"
+                    CornerRadius="20"
+                    HeightRequest="32"
+                    WidthRequest="32"
+                    Margin="5,0"
+                    Clicked="RefreshButton_Clicked"/>
+            <!-- Exit IconButton -->
+            <Button Grid.Column="3"
+                    Text="&#xf00d;"
+                    FontFamily="FA"
+                    FontSize="22"
+                    BackgroundColor="#FFCDD2"
+                    CornerRadius="20"
+                    HeightRequest="32"
+                    WidthRequest="32"
+                    Margin="5,0"
+                    Clicked="ExitButton_Clicked"/>
+        </Grid>
     </Grid>
-
 </ContentPage>

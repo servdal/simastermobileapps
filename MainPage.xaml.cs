@@ -28,7 +28,7 @@ public partial class MainPage : ContentPage
             else
             {
                 await DisplayAlert("Gagal", "Tidak dapat mengambil Firebase ID. Pastikan koneksi internet stabil.", "OK");
-                url = "https://sdtqdu.sch.id/cekandroid/"; // Fallback tanpa token
+                url = "https://sdtqdu.sch.id/"; // Fallback tanpa token
             }
             Debug.WriteLine($"Loading URL: {url}");
             MyWebView.Source = new UrlWebViewSource { Url = url };
@@ -38,7 +38,6 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine($"Error: {ex.Message}");
             await DisplayAlert("Error", $"Terjadi kesalahan: {ex.Message}", "OK");
-            // Fallback: tetap tampilkan WebView tanpa token
             string fallbackUrl = "https://sdtqdu.sch.id/";
             MyWebView.Source = new UrlWebViewSource { Url = fallbackUrl };
             UrlLabel.Text = fallbackUrl;

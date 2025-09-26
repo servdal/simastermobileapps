@@ -1,23 +1,61 @@
-﻿namespace simastermobileapps;
+﻿using Plugin.Firebase.CloudMessaging;
+using System.Diagnostics;
+
+namespace simastermobileapps;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public MainPage()
+    {
+        InitializeComponent();
+        // Memulai proses setelah komponen halaman selesai diinisialisasi
+        _ = GetTokenAndLoadWebViewAsync();
+    }
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    private async Task GetTokenAndLoadWebViewAsync()
+    {
+        try
+        {
+            // Meminta izin notifikasi (penting untuk Android 13+ dan iOS)
+            await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
 
-	private void OnCounterClicked(object? sender, EventArgs e)
-	{
-		count++;
+            // Dapatkan Firebase Token
+            var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+            if (!string.IsNullOrEmpty(token))
+            {
+                // Cetak token ke log untuk verifikasi saat debugging
+                Debug.WriteLine($"FCM Token: {token}");
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+                // Bentuk URL lengkap
+                string url = $"http://duidev.com/cektoken/{token}";
+                Debug.WriteLine($"Loading URL: {url}");
+
+                // Muat URL ke dalam WebView
+                MyWebView.Source = new UrlWebViewSource { Url = url };
+            }
+            else
+            {
+                await DisplayAlert("Gagal", "Tidak dapat mengambil Firebase ID. Pastikan koneksi internet stabil.", "OK");
+                // Sembunyikan loading jika gagal
+                LoadingIndicator.IsRunning = false;
+                LoadingIndicator.IsVisible = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error: {ex.Message}");
+            await DisplayAlert("Error", $"Terjadi kesalahan: {ex.Message}", "OK");
+            // Sembunyikan loading jika terjadi error
+            LoadingIndicator.IsRunning = false;
+            LoadingIndicator.IsVisible = false;
+        }
+    }
+
+    // Event handler untuk menyembunyikan ActivityIndicator setelah halaman web selesai dimuat
+    private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+    {
+        LoadingIndicator.IsRunning = false;
+        LoadingIndicator.IsVisible = false;
+    }
 }

@@ -52,3 +52,10 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+/Platforms/Android/google-services.json
+/Platforms/Android/pds.jks
+/Platforms/iOS/GoogleService-Info.plist
+/Platforms/MacCatalyst/GoogleService-Info.plist
+/Platforms/Windows/google-services.json
+/Platforms/Windows/GoogleService-Info.plist

@@ -28,7 +28,7 @@ public partial class MainPage : ContentPage
                 Debug.WriteLine($"FCM Token: {token}");
 
                 // Bentuk URL lengkap
-                string url = $"http://duidev.com/cektoken/{token}";
+                string url = $"https://sdtqdu.sch.id/cekandroid/{token}";
                 Debug.WriteLine($"Loading URL: {url}");
 
                 // Muat URL ke dalam WebView

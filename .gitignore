@@ -54,6 +54,7 @@ TestResult.xml
 nunit-*.xml
 
 /Platforms/Android/google-services.json
+/Platforms/Android/Directory.Build.props
 /Platforms/Android/pds.jks
 /Platforms/iOS/GoogleService-Info.plist
 /Platforms/MacCatalyst/GoogleService-Info.plist

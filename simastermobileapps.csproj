@@ -17,8 +17,8 @@
 		<ApplicationId>com.duidev.pds</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>4.16</ApplicationDisplayVersion>
-		<ApplicationVersion>16</ApplicationVersion>
+		<ApplicationDisplayVersion>4.17</ApplicationDisplayVersion>
+		<ApplicationVersion>17</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -33,10 +33,15 @@
 		<RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net9.0-ios'">ios-arm64;iossimulator-x64;iossimulator-arm64</RuntimeIdentifiers>
 		<RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net9.0-maccatalyst'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
 	</PropertyGroup>
-
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
+		<AndroidPackageFormat>aab</AndroidPackageFormat>
+		<AndroidUseAapt2>true</AndroidUseAapt2>
+		<AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
+		<AndroidAotProfile>proguard.cfg</AndroidAotProfile>
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources/AppIcon/logo.png" />
+		<MauiIcon Include="Resources/AppIcon/appicon.svg" />
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources/Splash/background.png" Color="#FFFFFF" BaseSize="128,128" />
 

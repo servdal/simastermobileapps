@@ -52,7 +52,7 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-
+Secrets.cs
 /Platforms/Android/google-services.json
 /Platforms/Android/Directory.Build.props
 /Platforms/Android/pds.jks

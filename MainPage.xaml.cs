@@ -3,12 +3,13 @@ using System.Diagnostics;
 
 namespace simastermobileapps;
 
+// Tambahkan 'partial' di sini
 public partial class MainPage : ContentPage
 {
     public MainPage()
     {
         InitializeComponent();
-		NavigationPage.SetHasNavigationBar(this, false);
+        NavigationPage.SetHasNavigationBar(this, false);
         _ = GetTokenAndLoadWebViewAsync();
     }
 
@@ -23,12 +24,14 @@ public partial class MainPage : ContentPage
             if (!string.IsNullOrEmpty(token))
             {
                 Debug.WriteLine($"FCM Token: {token}");
-                url = $"https://sdtqdu.sch.id/cekandroid/{token}";
+                // Gunakan variabel BaseUrl
+                url = $"{BaseUrl}/cekandroid/{token}";
             }
             else
             {
                 await DisplayAlert("Gagal", "Tidak dapat mengambil Firebase ID. Pastikan koneksi internet stabil.", "OK");
-                url = "https://sdtqdu.sch.id/"; // Fallback tanpa token
+                // Gunakan variabel BaseUrl
+                url = BaseUrl; // Fallback tanpa token
             }
             Debug.WriteLine($"Loading URL: {url}");
             MyWebView.Source = new UrlWebViewSource { Url = url };
@@ -38,7 +41,8 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine($"Error: {ex.Message}");
             await DisplayAlert("Error", $"Terjadi kesalahan: {ex.Message}", "OK");
-            string fallbackUrl = "https://sdtqdu.sch.id/";
+            // Gunakan variabel BaseUrl
+            string fallbackUrl = BaseUrl;
             MyWebView.Source = new UrlWebViewSource { Url = fallbackUrl };
             UrlLabel.Text = fallbackUrl;
         }
@@ -49,6 +53,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+    // ... sisa kode Anda tidak perlu diubah ...
     private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
     {
         LoadingIndicator.IsRunning = false;
@@ -76,11 +81,9 @@ public partial class MainPage : ContentPage
 
     private void ExitButton_Clicked(object sender, EventArgs e)
     {
-        // Untuk keluar aplikasi (Android/iOS), gunakan kode berikut:
 #if ANDROID
         Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
 #elif IOS
-        // Tidak direkomendasikan untuk force close di iOS, bisa gunakan exit(0) jika benar-benar perlu
         System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
 #endif
     }

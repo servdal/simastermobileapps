@@ -16,9 +16,10 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .RegisterFirebaseServices()
             .ConfigureFonts(fonts =>
-            {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+			{
+				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+				fonts.AddFont("fontawesome-webfont.ttf", "FA");
             });
 
 #if DEBUG
